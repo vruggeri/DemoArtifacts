@@ -40,6 +40,11 @@ stages:
       inputs:
         command: publish
         publishWebProjects: false
-        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        arguments: '-r linux-x64 --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: True
 
+    - task: PublishBuildArtifacts@1
+      displayName: "Upload Artifacts"
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+        artifactName: 'ruggeri'
