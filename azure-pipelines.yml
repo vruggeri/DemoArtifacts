@@ -1,6 +1,5 @@
 trigger:
 - master
-
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -13,6 +12,7 @@ stages:
     variables:
       BuildConfiguration: release
       MyRunNumber: $(GitVersion.SemVer).$(Rev:r)
+      name: '1.0.0.$(Rev:r)'
 
     steps:
     - task: DotNetCoreCLI@2
