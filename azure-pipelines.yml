@@ -12,7 +12,7 @@ stages:
     displayName: Build Nuget packages
     variables:
       BuildConfiguration: release
-      #MyRunNumber: $(GitVersion.FullSemVer)
+      MyRunNumber: $(GitVersion.FullSemVer)
     steps:
     - task: DotNetCoreCLI@2
       inputs:
@@ -25,19 +25,19 @@ stages:
         versionSpec: '5.*'
         includePrerelease: true
 
-    # - task: Assembly-Info-NetCore@2
-    #   inputs:
-    #     Path: '$(Build.SourcesDirectory)'
-    #     FileNames: '**/MyLib.Nuget.Corporate.csproj'
-    #     InsertAttributes: true
-    #     FileEncoding: 'auto'
-    #     WriteBOM: false
-    #     VersionNumber: '$(Build.BuildNumber)'
-    #     FileVersionNumber: '$(Build.BuildNumber)'
-    #     PackageVersion: '$(Build.BuildNumber)'
-    #     LogLevel: 'verbose'
-    #     FailOnWarning: false
-    #     DisableTelemetry: false
+    - task: Assembly-Info-NetCore@2
+      inputs:
+        Path: '$(Build.SourcesDirectory)'
+        FileNames: '**/MyLib.Nuget.Corporate.csproj'
+        InsertAttributes: true
+        FileEncoding: 'auto'
+        WriteBOM: false
+        VersionNumber: '$(MyRunNumber)'
+        FileVersionNumber: '$(MyRunNumber)'
+        PackageVersion: '$(MyRunNumber)'
+        LogLevel: 'verbose'
+        FailOnWarning: false
+        DisableTelemetry: false
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
@@ -49,6 +49,7 @@ stages:
         command: 'pack'
         packagesToPack: '**/MyLib.Nuget.Corporate.csproj'
         versioningScheme: 'off'
+        versionEnvVar: $(MyRunNumber)
 
     - task: PublishBuildArtifacts@1
       displayName: "Upload Artifacts"
