@@ -11,7 +11,7 @@ stages:
     displayName: Build Nuget packages
     variables:
       BuildConfiguration: release
-      MyRunNumber: $(GitVersion.FullSemVer)
+      MyRunNumber: $(GitVersion.FullSemVer).$(Rev:r)
     steps:
     - task: DotNetCoreCLI@2
       inputs:
