@@ -1,3 +1,4 @@
+name: $(BuildDefinitionName)-$(Rev:.r)
 trigger:
 - master
 pool:
@@ -11,8 +12,7 @@ stages:
     displayName: Build Nuget packages
     variables:
       BuildConfiguration: release
-      MyRunNumber: $(GitVersion.FullSemVer)
-
+      #MyRunNumber: $(GitVersion.FullSemVer)
     steps:
     - task: DotNetCoreCLI@2
       inputs:
