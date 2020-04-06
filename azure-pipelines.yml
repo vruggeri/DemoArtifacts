@@ -54,4 +54,4 @@ stages:
       displayName: "Upload Artifacts"
       inputs:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-        artifactName: 'DemoArtifacts'
+        artifactName: 'DemoArtifacts' 
