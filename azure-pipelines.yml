@@ -1,4 +1,4 @@
-name: $(BuildDefinitionName)-$(Rev:.r)
+#name: $(BuildDefinitionName)-$(Rev:.r)
 trigger:
 - master
 pool:
